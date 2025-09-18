@@ -27,11 +27,11 @@
             color: var(--text-color);
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Fix for mobile cutoff */
-            padding: 2rem 1rem; /* Added padding */
+            align-items: flex-start;
+            padding: 2rem 1rem;
             min-height: 100vh;
             background-color: var(--gray-light);
-            /* Static American Flag Background */
+            /* ✅ American Flag Background RESTORED */
             background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjgwMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0icmdiYSgyNDUsIDI0NSwgMjQ1LCAxKSIvPjxwYXRoIGZpbGw9InJnYmEoMjEwLCAyMTAsIDIxMCwgMC4wOCkiIGQ9Ik0xMDAgMEMxNTAgNDAgMjAwIDAgMjUwIDQwQzMwMCA4MCAzNTAgNDAgNDAwIDBDNDUwIDQwIDUwMCAwIDU1MCA0MEM2MDAgODAgNjUwIDQwIDcwMCAwQzc1MCA0MCA4MDAgMCA4MDAgMFY4MDBINDQwQzQwMCA3NjAgMzYwIDgwMCAzMjAgNzYwQzI4MCA3MjAgMjQwIDc2MCAyMDAgNzIwQzE2MCA2ODAgMTIwIDcyMCA4MCA2ODBDNDAgNjQwIDAgNjgwIDAgNjQwVjQwQzQwIDIwIDgwIDQwIDEwMCAwWiIvPjxwYXRoIGZpbGw9InJnYmEoMjAwLCAyMDAsIDIAwLCAwLjA4KSIgZD0iTTgwMCA4MDBWNDA0Qzc1MCAzNjQgNzAwIDQwNCA2NTAgMzY0QzYwMCAzMjQgNTUwIDM2NCA1MDAgMzI0QzQ1MCAyODQgNDAwIDMyNCAzNTAgMjg0QzMwMCAyNDQgMjUwIDI4NCAyMDAgMjQ0QzE1MCAyMDQgMTAwIDI0NCA1MCAyMDRDMC AxNjQgMCAwIDAgMFY4MDBaIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCBmaWxsPSJ1cmwoI3BhdHRlcm4pIiBoZWlnaHQ9IjEwMCUiIHdpZHRoPSIxMDAlIi8+PC9zdmc+');
             background-attachment: fixed;
         }
@@ -141,10 +141,7 @@
             animation: fadeOut 0.5s ease-out forwards;
         }
         @keyframes fadeOut {
-            to {
-                opacity: 0;
-                transform: scale(0.95);
-            }
+            to { opacity: 0; transform: scale(0.95); }
         }
         .thank-you-screen {
             display: none;
@@ -173,7 +170,6 @@
             line-height: 1.6;
         }
         @media (min-width: 480px) {
-            body { padding: 2rem; }
             .container { padding: 2rem; }
             header { gap: 2rem; }
         }
@@ -196,6 +192,7 @@
                         <i class="fas fa-user"></i>
                     </div>
                 </div>
+                
                 <div class="input-group-wrapper">
                     <label for="email" class="form-label">FHSU Email</label>
                     <div class="input-group">
@@ -203,6 +200,7 @@
                         <i class="fas fa-envelope"></i>
                     </div>
                 </div>
+                
                 <div class="input-group-wrapper">
                     <label for="phone" class="form-label">Phone Number</label>
                     <div class="input-group">
@@ -210,6 +208,7 @@
                         <i class="fas fa-phone"></i>
                     </div>
                 </div>
+                
                 <div class="input-group-wrapper">
                     <label for="snapchat" class="form-label">Snapchat</label>
                     <div class="input-group">
@@ -217,12 +216,12 @@
                         <i class="fab fa-snapchat"></i>
                     </div>
                 </div>
+                
                 <button type="submit" id="submitBtn" class="submit-btn">
                     <span class="btn-text">Submit</span>
                 </button>
             </form>
         </div>
-
         <div id="thankYouScreen" class="thank-you-screen">
             <img src="https://drive.google.com/thumbnail?id=1Jm4dJp3i-TwE5wvpI0LDBvh7Dl-gVOqJ&sz=s4000" alt="Turning Point USA Logo" class="logo" loading="lazy">
             <h2>Thank You!</h2>
@@ -231,9 +230,6 @@
     </main>
 
     <script>
-        // ✅ UPDATED: The script now uses the fetch API to send data to your Web App URL.
-        const SCRIPT_URL = 'YOUR_WEB_APP_URL_HERE'; // <-- PASTE YOUR WEB APP URL HERE
-        
         const signUpForm = document.getElementById('signUpForm');
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.querySelector('.btn-text');
@@ -252,40 +248,42 @@
                 handleError("Please provide either a Phone Number or a Snapchat Username.");
                 return;
             }
-            
-            const formData = new FormData(signUpForm);
-            const dataObject = Object.fromEntries(formData.entries());
 
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors', // Important for this type of request
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dataObject)
-            })
-            .then(res => {
-                // The 'no-cors' mode means we can't read the response,
-                // but we can assume success if the request didn't throw an error.
-                handleSuccess();
-            })
-            .catch(error => {
-                handleError('Submission failed: ' + error);
-            });
+            const dataObject = Object.fromEntries(new FormData(signUpForm).entries());
+
+            google.script.run
+                .withSuccessHandler(response => {
+                    // The server script sends back a JSON string. We parse it.
+                    const result = JSON.parse(response);
+                    if (result.status === 'success') {
+                        handleSuccess();
+                    } else {
+                        // If the server script caught an error, it will be in result.message
+                        handleError('An error occurred: ' + result.message);
+                    }
+                })
+                .withFailureHandler(error => {
+                    // This handles network errors or if the script URL is wrong.
+                    handleError('Submission failed: ' + error.message);
+                })
+                .processForm(dataObject);
         });
 
         function handleSuccess() {
             formContainer.classList.add('fade-out');
+
             setTimeout(() => {
                 formContainer.style.display = 'none';
                 thankYouScreen.style.display = 'flex';
-                thankYouScreen.style.animation = 'fadeIn 0.5s ease-out forwards';
-            }, 500);
+                // Use the existing fadeIn animation
+                thankYouScreen.style.opacity = 0; // Reset opacity before animation
+                thankYouScreen.classList.add('fade-in'); 
+            }, 500); // This delay should match the animation-duration in the CSS
         }
 
         function handleError(message) {
-            alert(message);
+            alert(message); // Using a simple alert for errors
+            // Reset the button so the user can try again
             submitBtn.disabled = false;
             btnText.textContent = 'Submit';
         }
