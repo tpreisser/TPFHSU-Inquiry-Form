@@ -3,9 +3,11 @@ const { Octokit } = require("@octokit/rest");
 
 const octokit = new Octokit({ auth: process.env.GITHUB_PAT });
 
-// The repository details
-const GITHUB_OWNER = 'tpreisser'; // Your GitHub username
-const GITHUB_REPO = 'TPFHSU-Inquiry-Form'; // Your repository name
+// ▼▼▼ DOUBLE-CHECK THESE TWO LINES ▼▼▼
+const GITHUB_OWNER = 'tpreisser';          // Make sure this is your exact GitHub username.
+const GITHUB_REPO = 'TPFHSU-Inquiry-Form'; // Make sure this is your exact repository name.
+// ▲▲▲ DOUBLE-CHECK THESE TWO LINES ▲▲▲
+
 const FILE_PATH = 'submissions.csv';
 
 exports.handler = async (event) => {
