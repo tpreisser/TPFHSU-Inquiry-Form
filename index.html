@@ -27,11 +27,14 @@
             color: var(--text-color);
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: flex-start; 
             padding: 2rem 1rem;
             min-height: 100vh;
             background-color: var(--gray-light);
-            /* ✅ American Flag Background RESTORED */
+            
+            /************************************************************/
+            /* ✅ ✅ ✅ THIS IS THE RESTORED AMERICAN FLAG BACKGROUND ✅ ✅ ✅ */
+            /************************************************************/
             background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjgwMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0icmdiYSgyNDUsIDI0NSwgMjQ1LCAxKSIvPjxwYXRoIGZpbGw9InJnYmEoMjEwLCAyMTAsIDIxMCwgMC4wOCkiIGQ9Ik0xMDAgMEMxNTAgNDAgMjAwIDAgMjUwIDQwQzMwMCA4MCAzNTAgNDAgNDAwIDBDNDUwIDQwIDUwMCAwIDU1MCA0MEM2MDAgODAgNjUwIDQwIDcwMCAwQzc1MCA0MCA4MDAgMCA4MDAgMFY4MDBINDQwQzQwMCA3NjAgMzYwIDgwMCAzMjAgNzYwQzI4MCA3MjAgMjQwIDc2MCAyMDAgNzIwQzE2MCA2ODAgMTIwIDcyMCA4MCA2ODBDNDAgNjQwIDAgNjgwIDAgNjQwVjQwQzQwIDIwIDgwIDQwIDEwMCAwWiIvPjxwYXRoIGZpbGw9InJnYmEoMjAwLCAyMDAsIDIAwLCAwLjA4KSIgZD0iTTgwMCA4MDBWNDA0Qzc1MCAzNjQgNzAwIDQwNCA2NTAgMzY0QzYwMCAzMjQgNTUwIDM2NCA1MDAgMzI0QzQ1MCAyODQgNDAwIDMyNCAzNTAgMjg0QzMwMCAyNDQgMjUwIDI4NCAyMDAgMjQ0QzE1MCAyMDQgMTAwIDI0NCA1MCAyMDRDMC AxNjQgMCAwIDAgMFY4MDBaIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCBmaWxsPSJ1cmwoI3BhdHRlcm4pIiBoZWlnaHQ9IjEwMCUiIHdpZHRoPSIxMDAlIi8+PC9zdmc+');
             background-attachment: fixed;
         }
@@ -141,7 +144,10 @@
             animation: fadeOut 0.5s ease-out forwards;
         }
         @keyframes fadeOut {
-            to { opacity: 0; transform: scale(0.95); }
+            to {
+                opacity: 0;
+                transform: scale(0.95);
+            }
         }
         .thank-you-screen {
             display: none;
@@ -151,6 +157,9 @@
             text-align: center;
             opacity: 0;
             min-height: 400px;
+        }
+        .thank-you-screen.fade-in { /* Make sure fade-in is applied here */
+            animation: fadeIn 0.5s 0.2s ease-out forwards;
         }
         .thank-you-screen .logo {
             height: clamp(80px, 30vw, 150px);
@@ -170,8 +179,12 @@
             line-height: 1.6;
         }
         @media (min-width: 480px) {
-            .container { padding: 2rem; }
-            header { gap: 2rem; }
+            .container {
+                padding: 2rem;
+            }
+            header {
+                gap: 2rem;
+            }
         }
     </style>
 </head>
@@ -253,37 +266,30 @@
 
             google.script.run
                 .withSuccessHandler(response => {
-                    // The server script sends back a JSON string. We parse it.
                     const result = JSON.parse(response);
                     if (result.status === 'success') {
                         handleSuccess();
                     } else {
-                        // If the server script caught an error, it will be in result.message
-                        handleError('An error occurred: ' + result.message);
+                        handleError('An error occurred: '.concat(result.message));
                     }
                 })
                 .withFailureHandler(error => {
-                    // This handles network errors or if the script URL is wrong.
-                    handleError('Submission failed: ' + error.message);
+                    handleError('Submission failed: '.concat(error.message));
                 })
                 .processForm(dataObject);
         });
 
         function handleSuccess() {
             formContainer.classList.add('fade-out');
-
             setTimeout(() => {
                 formContainer.style.display = 'none';
                 thankYouScreen.style.display = 'flex';
-                // Use the existing fadeIn animation
-                thankYouScreen.style.opacity = 0; // Reset opacity before animation
-                thankYouScreen.classList.add('fade-in'); 
-            }, 500); // This delay should match the animation-duration in the CSS
+                thankYouScreen.classList.add('fade-in');
+            }, 500);
         }
 
         function handleError(message) {
-            alert(message); // Using a simple alert for errors
-            // Reset the button so the user can try again
+            alert(message);
             submitBtn.disabled = false;
             btnText.textContent = 'Submit';
         }
