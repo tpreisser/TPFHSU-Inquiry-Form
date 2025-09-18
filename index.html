@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base target="_top">
+    <title>TPUSA at FHSU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-blue: #002868;
+            --brand-red: #BF0A30;
+            --gray-light: #f5f5f5;
+            --text-color: #212529;
+            --border-radius: 12px;
+            --transition-snap: all 0.3s ease-in-out;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        html { font-size: 16px; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Fix for mobile cutoff */
+            padding: 2rem 1rem; /* Added padding */
+            min-height: 100vh;
+            background-color: var(--gray-light);
+            /* Static American Flag Background */
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB3aWR0aD0iODAwIiBoZWlnaHQ9IjgwMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0icmdiYSgyNDUsIDI0NSwgMjQ1LCAxKSIvPjxwYXRoIGZpbGw9InJnYmEoMjEwLCAyMTAsIDIxMCwgMC4wOCkiIGQ9Ik0xMDAgMEMxNTAgNDAgMjAwIDAgMjUwIDQwQzMwMCA4MCAzNTAgNDAgNDAwIDBDNDUwIDQwIDUwMCAwIDU1MCA0MEM2MDAgODAgNjUwIDQwIDcwMCAwQzc1MCA0MCA4MDAgMCA4MDAgMFY4MDBINDQwQzQwMCA3NjAgMzYwIDgwMCAzMjAgNzYwQzI4MCA3MjAgMjQwIDc2MCAyMDAgNzIwQzE2MCA2ODAgMTIwIDcyMCA4MCA2ODBDNDAgNjQwIDAgNjgwIDAgNjQwVjQwQzQwIDIwIDgwIDQwIDEwMCAwWiIvPjxwYXRoIGZpbGw9InJnYmEoMjAwLCAyMDAsIDIAwLCAwLjA4KSIgZD0iTTgwMCA4MDBWNDA0Qzc1MCAzNjQgNzAwIDQwNCA2NTAgMzY0QzYwMCAzMjQgNTUwIDM2NCA1MDAgMzI0QzQ1MCAyODQgNDAwIDMyNCAzNTAgMjg0QzMwMCAyNDQgMjUwIDI4NCAyMDAgMjQ0QzE1MCAyMDQgMTAwIDI0NCA1MCAyMDRDMC AxNjQgMCAwIDAgMFY4MDBaIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCBmaWxsPSJ1cmwoI3BhdHRlcm4pIiBoZWlnaHQ9IjEwMCUiIHdpZHRoPSIxMDAlIi8+PC9zdmc+');
+            background-attachment: fixed;
+        }
+        .container {
+            width: 100%; max-width: 500px;
+            background: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            border-top: 6px solid var(--brand-red);
+            opacity: 0; transform: translateY(20px);
+            animation: fadeIn 0.5s 0.1s ease-out forwards;
+            position: relative;
+            z-index: 1;
+            margin: auto 0;
+        }
+        @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+        header {
+            text-align: center; margin-bottom: 2rem;
+            display: flex; justify-content: center; align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap; position: relative; padding-bottom: 1.5rem;
+        }
+        header::after {
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%); width: 80%; height: 4px;
+            background: linear-gradient(90deg, var(--brand-red) 33%, white 33%, white 66%, var(--brand-blue) 66%);
+            border-radius: 2px;
+        }
+        .logo {
+            width: auto;
+            max-width: 40%;
+            height: clamp(50px, 18vw, 100px);
+        }
+        h1 {
+            font-family: 'Oswald', sans-serif; color: var(--brand-blue);
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            margin: 0.5rem 0 0;
+            line-height: 1.1; text-transform: uppercase; width: 100%;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 700;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+        }
+        .input-group-wrapper {
+            margin-bottom: 1.5rem;
+            opacity: 0; transform: translateY(20px);
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .input-group {
+            display: grid;
+            grid-template-columns: 3rem 1fr;
+            align-items: center;
+        }
+        .input-group i {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            text-align: center;
+            color: #ccc;
+            transition: var(--transition-snap);
+            font-size: 1.1em;
+        }
+        .form-input {
+            grid-column: 1 / 3;
+            grid-row: 1 / 2;
+            width: 100%;
+            padding: 0 1rem 0 3rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #fff;
+            transition: var(--transition-snap);
+            min-height: 50px; 
+            line-height: 50px;
+        }
+        .input-group-wrapper:nth-of-type(1) { animation-delay: 0.2s; }
+        .input-group-wrapper:nth-of-type(2) { animation-delay: 0.3s; }
+        .input-group-wrapper:nth-of-type(3) { animation-delay: 0.4s; }
+        .input-group-wrapper:nth-of-type(4) { animation-delay: 0.5s; }
+        .input-group:focus-within i {
+             color: var(--brand-blue);
+        }
+        .form-input:focus {
+            outline: none; border-color: var(--brand-blue);
+            box-shadow: 0 0 0 3px rgba(0, 40, 104, 0.2);
+        }
+        .submit-btn {
+            width: 100%; padding: 1rem; border: none; border-radius: 8px;
+            background: linear-gradient(45deg, var(--brand-red), #8A0722);
+            color: #fff; font-family: 'Oswald', sans-serif; font-size: 1.2rem;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+            transition: var(--transition-snap); position: relative; overflow: hidden;
+            opacity: 0; transform: translateY(20px);
+            animation: fadeIn 0.5s 0.6s ease-out forwards;
+            margin-top: 1.5rem;
+        }
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(191, 10, 48, 0.3);
+        }
+        .submit-btn:active:not(:disabled) { transform: translateY(-2px) scale(1.01); }
+        .submit-btn:disabled { background: #999; cursor: not-allowed; }
+        .fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+        }
+        .thank-you-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0;
+            min-height: 400px;
+        }
+        .thank-you-screen .logo {
+            height: clamp(80px, 30vw, 150px);
+            max-width: 60%;
+            margin-bottom: 1.5rem;
+        }
+        .thank-you-screen h2 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--brand-blue);
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            margin-bottom: 0.5rem;
+        }
+        .thank-you-screen p {
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            color: #555;
+            margin: 0;
+            line-height: 1.6;
+        }
+        @media (min-width: 480px) {
+            body { padding: 2rem; }
+            .container { padding: 2rem; }
+            header { gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div id="formContainer">
+            <header>
+                <img src="https://drive.google.com/thumbnail?id=1Jm4dJp3i-TwE5wvpI0LDBvh7Dl-gVOqJ&sz=s4000" alt="Turning Point USA Logo" class="logo" loading="lazy">
+                <img src="https://drive.google.com/thumbnail?id=192CDV3Ysjw7BZEX3HJ93CzJ1l-V_rcF1&sz=s4000" alt="Fort Hays State University Logo" class="logo" loading="lazy">
+                <h1>Join The Movement</h1>
+            </header>
+            
+            <form id="signUpForm">
+                <div class="input-group-wrapper">
+                    <label for="name" class="form-label">Full Name</label>
+                    <div class="input-group">
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Victor E. Tiger" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="input-group-wrapper">
+                    <label for="email" class="form-label">FHSU Email</label>
+                    <div class="input-group">
+                        <input type="email" id="email" name="email" class="form-input" placeholder="vetiger@mail.fhsu.edu" required pattern=".+@mail\.fhsu\.edu" title="Please enter a valid FHSU email address.">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                </div>
+                <div class="input-group-wrapper">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <div class="input-group">
+                        <input type="tel" id="phone" name="phone" class="form-input" placeholder="(785) 555-1234">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                </div>
+                <div class="input-group-wrapper">
+                    <label for="snapchat" class="form-label">Snapchat</label>
+                    <div class="input-group">
+                        <input type="text" id="snapchat" name="snapchat" class="form-input" placeholder="fhsu.tiger" pattern="[A-Za-z0-9_.-]{3,15}" title="3-15 characters. Letters, numbers, and symbols (_, ., -) only.">
+                        <i class="fab fa-snapchat"></i>
+                    </div>
+                </div>
+                <button type="submit" id="submitBtn" class="submit-btn">
+                    <span class="btn-text">Submit</span>
+                </button>
+            </form>
+        </div>
+
+        <div id="thankYouScreen" class="thank-you-screen">
+            <img src="https://drive.google.com/thumbnail?id=1Jm4dJp3i-TwE5wvpI0LDBvh7Dl-gVOqJ&sz=s4000" alt="Turning Point USA Logo" class="logo" loading="lazy">
+            <h2>Thank You!</h2>
+            <p>Your submission has been received.<br>We will be in touch soon!</p>
+        </div>
+    </main>
+
+    <script>
+        // ✅ UPDATED: The script now uses the fetch API to send data to your Web App URL.
+        const SCRIPT_URL = 'YOUR_WEB_APP_URL_HERE'; // <-- PASTE YOUR WEB APP URL HERE
+        
+        const signUpForm = document.getElementById('signUpForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.querySelector('.btn-text');
+        const phoneInput = document.getElementById('phone');
+        const snapchatInput = document.getElementById('snapchat');
+        const formContainer = document.getElementById('formContainer');
+        const thankYouScreen = document.getElementById('thankYouScreen');
+
+        signUpForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            submitBtn.disabled = true;
+            btnText.textContent = 'Submitting...';
+
+            if (!phoneInput.value.trim() && !snapchatInput.value.trim()) {
+                handleError("Please provide either a Phone Number or a Snapchat Username.");
+                return;
+            }
+            
+            const formData = new FormData(signUpForm);
+            const dataObject = Object.fromEntries(formData.entries());
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Important for this type of request
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataObject)
+            })
+            .then(res => {
+                // The 'no-cors' mode means we can't read the response,
+                // but we can assume success if the request didn't throw an error.
+                handleSuccess();
+            })
+            .catch(error => {
+                handleError('Submission failed: ' + error);
+            });
+        });
+
+        function handleSuccess() {
+            formContainer.classList.add('fade-out');
+            setTimeout(() => {
+                formContainer.style.display = 'none';
+                thankYouScreen.style.display = 'flex';
+                thankYouScreen.style.animation = 'fadeIn 0.5s ease-out forwards';
+            }, 500);
+        }
+
+        function handleError(message) {
+            alert(message);
+            submitBtn.disabled = false;
+            btnText.textContent = 'Submit';
+        }
+    </script>
+</body>
+</html>
